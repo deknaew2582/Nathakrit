@@ -11,6 +11,7 @@ const ProgressBar = styled(motion.div)`
   background-color: #64FFDA;
   transform-origin: 0%;
   z-index: 2000;
+  pointer-events: none; /* Add this line */
 `;
 
 const ScrollIndicator = () => {

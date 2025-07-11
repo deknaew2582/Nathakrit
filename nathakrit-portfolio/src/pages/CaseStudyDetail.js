@@ -1,62 +1,178 @@
 import React from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-
-const CaseStudyContainer = styled.div`
-  padding: 4rem 2rem;
-  background-color: #0A192F;
-  color: #FFFFFF;
-  min-height: 100vh;
+const DetailContainer = styled(motion.div)`
+  padding: 2rem;
+  background-color: #112240;
+  color: #E0E0E0;
+  border-radius: 8px;
   max-width: 900px;
-  margin: 0 auto;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
 `;
 
-const Title = styled.h1`
-  font-size: 3rem;
+const ProjectTitle = styled.h1`
+  font-size: 2.5rem;
   color: #64FFDA;
   margin-bottom: 2rem;
   text-align: center;
 `;
 
+const MainContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+`;
+
+const LeftColumn = styled.div`
+  flex: 2;
+`;
+
+const RightColumn = styled.div`
+  flex: 1;
+  background-color: #0A192F;
+  padding: 1.5rem;
+  border-radius: 8px;
+`;
+
+const Section = styled.div`
+  margin-bottom: 2rem;
+`;
+
 const SectionTitle = styled.h2`
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #64FFDA;
-  margin-top: 3rem;
   margin-bottom: 1rem;
+  border-bottom: 1px solid #64FFDA;
+  padding-bottom: 0.5rem;
 `;
 
 const Paragraph = styled.p`
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.6;
-  margin-bottom: 1rem;
+`;
+
+const InfoList = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+
+const InfoItem = styled.li`
+  margin-bottom: 0.5rem;
+  strong {
+    color: #64FFDA;
+  }
+`;
+
+const TechList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+`;
+
+const TechTag = styled.span`
+  background-color: #233554;
+  color: #64FFDA;
+  padding: 0.3rem 0.7rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+`;
+
+const LiveDemoButton = styled.a`
+  display: inline-block;
+  background-color: #64FFDA;
+  color: #0A192F;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #4CAF9D;
+    color: #FFFFFF;
+  }
+
+  &.disabled {
+    background-color: #233554;
+    color: #8892B0;
+    cursor: not-allowed;
+  }
+`;
+
+const ImageGallery = styled.div`
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+`;
+
+const ProjectImage = styled.img`
+    width: 100%;
+    border-radius: 8px;
 `;
 
 const CaseStudyDetail = ({ project }) => {
-  // In a real application, you would fetch project details based on projectId
-  const projectDetails = {
-    title: `Project ${project.id}: ${project.title} Case Study`,
-    challenge: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    solution: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    result: 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
-    technologies: 'React, Node.js, MongoDB, AWS',
-  };
+  if (!project) return null;
 
   return (
-    <CaseStudyContainer>
-      <Title>{projectDetails.title}</Title>
-
-      <SectionTitle>The Challenge</SectionTitle>
-      <Paragraph>{projectDetails.challenge}</Paragraph>
-
-      <SectionTitle>The Solution</SectionTitle>
-      <Paragraph>{projectDetails.solution}</Paragraph>
-
-      <SectionTitle>The Result</SectionTitle>
-      <Paragraph>{projectDetails.result}</Paragraph>
-
-      <SectionTitle>Technologies Used</SectionTitle>
-      <Paragraph>{projectDetails.technologies}</Paragraph>
-    </CaseStudyContainer>
+    <DetailContainer>
+      <ProjectTitle>{project.title}</ProjectTitle>
+      <MainContent>
+        <LeftColumn>
+          <Section>
+            <SectionTitle>The Challenge</SectionTitle>
+            <Paragraph>{project.challenge}</Paragraph>
+          </Section>
+          <Section>
+            <SectionTitle>My Solution</SectionTitle>
+            <Paragraph>{project.solution}</Paragraph>
+          </Section>
+          <Section>
+            <SectionTitle>The Results</SectionTitle>
+            <Paragraph>{project.results}</Paragraph>
+          </Section>
+        </LeftColumn>
+        <RightColumn>
+          <Section>
+            <SectionTitle>Info</SectionTitle>
+            <InfoList>
+              <InfoItem><strong>Client:</strong> {project.client}</InfoItem>
+              <InfoItem><strong>Year:</strong> {project.year}</InfoItem>
+              <InfoItem><strong>Service:</strong> {project.service}</InfoItem>
+            </InfoList>
+          </Section>
+          <Section>
+            <SectionTitle>Technologies Used</SectionTitle>
+            <TechList>
+              {project.technologies.map(tech => <TechTag key={tech}>{tech}</TechTag>)}
+            </TechList>
+          </Section>
+          <LiveDemoButton 
+            href={project.liveDemoUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={!project.liveDemoUrl ? 'disabled' : ''}
+            onClick={(e) => !project.liveDemoUrl && e.preventDefault()}
+          >
+            {project.liveDemoUrl ? 'Live Demo' : 'Demo Unavailable'}
+          </LiveDemoButton>
+        </RightColumn>
+      </MainContent>
+      <ImageGallery>
+        {project.images.map((img, index) => (
+            <ProjectImage key={index} src={img} alt={`${project.title} screenshot ${index + 1}`} />
+        ))}
+      </ImageGallery>
+    </DetailContainer>
   );
 };
 

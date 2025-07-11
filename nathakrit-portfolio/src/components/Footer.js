@@ -22,8 +22,8 @@ const Footer = () => {
     <FooterContainer>
       <p>Nathakrit Chuajeen © 2025</p>
       <p>
-        <a href="#">LinkedIn</a>
-        <a href="#">GitHub</a>
+        <a href="https://www.linkedin.com/in/natakritc/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/deknaew2582" target="_blank" rel="noopener noreferrer">GitHub</a>
       </p>
     </FooterContainer>
   );

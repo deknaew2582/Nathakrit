@@ -10,8 +10,12 @@ const ContactContainer = styled.div`
   color: #E0E0E0;
   min-height: 100vh;
   text-align: center;
-  position: relative;
-  z-index: 1;
+  position: relative; /* Establishes stacking context */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 `;
 
 const BackgroundCanvas = styled(Canvas)`
@@ -20,55 +24,80 @@ const BackgroundCanvas = styled(Canvas)`
   left: 0;
   width: 100% !important;
   height: 100% !important;
-  z-index: 0;
+  z-index: 0; /* Background layer */
+`;
+
+const ContentContainer = styled(motion.div)`
+  position: relative;
+  z-index: 1; /* Content layer, above background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Heading = styled.h1`
   font-size: 3rem;
   color: #64FFDA;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+`;
+
+const CallToAction = styled.p`
+  font-size: 1.2rem;
+  line-height: 1.6;
   margin-bottom: 2rem;
 `;
 
-const EmailLink = styled.a`
-  font-size: 1.5rem;
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+`;
+
+const StyledButton = styled.a`
+  font-size: 1.2rem;
   color: #0A192F;
   background-color: #64FFDA;
   text-decoration: none;
   padding: 0.8rem 2rem;
   border-radius: 5px;
   display: inline-block;
-  margin-top: 1rem;
   transition: all 0.3s ease;
+  font-weight: bold;
 
   &:hover {
     background-color: #4CAF9D;
     color: #FFFFFF;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
-`;
-
-const CallToAction = styled.p`
-  font-size: 1.2rem;
-  line-height: 1.6;
 `;
 
 const Contact = ({ id }) => {
   return (
-    <ContactContainer id={id}
-      as={motion.div}
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <ContactContainer id={id}>
       <BackgroundCanvas>
         <Stars />
       </BackgroundCanvas>
-      <Heading>Let's build something great together.</Heading>
-      <EmailLink href="mailto:nathakrit.cha@gmail.com">
-        nathakrit.cha@gmail.com
-      </EmailLink>
-      <CallToAction>
-        Feel free to reach out for project inquiries or collaborations.
-      </CallToAction>
+      <ContentContainer
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Heading>Let's build something great together.</Heading>
+        <CallToAction>
+          Feel free to reach out for project inquiries or collaborations.
+        </CallToAction>
+        <ButtonContainer>
+          <StyledButton href="mailto:nathakrit.cha@gmail.com">
+            Email Me
+          </StyledButton>
+          <StyledButton href="/Nathakrit-Chuajeen-Resume.pdf" download>
+            Download Resume
+          </StyledButton>
+        </ButtonContainer>
+      </ContentContainer>
     </ContactContainer>
   );
 };

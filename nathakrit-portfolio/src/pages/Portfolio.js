@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import Stars from '../components/Backgrounds/Stars';
 import Modal from '../components/Modal';
 import CaseStudyDetail from './CaseStudyDetail';
-
+import { projectsData } from '../data/projects'; // Import the new data
 
 const PortfolioContainer = styled.div`
   padding: 6rem 2rem;
@@ -28,36 +28,56 @@ const BackgroundCanvas = styled(Canvas)`
 const Title = styled.h1`
   text-align: center;
   font-size: 3rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   color: #64FFDA;
 `;
 
-const ProjectGrid = styled.div`
+const FilterBar = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+`;
+
+const FilterButton = styled.button`
+  background-color: ${({ active }) => (active ? '#64FFDA' : 'transparent')};
+  color: ${({ active }) => (active ? '#0A192F' : '#64FFDA')};
+  border: 1px solid #64FFDA;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #64FFDA;
+    color: #0A192F;
+  }
+`;
+
+const ProjectGrid = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted minmax for better 3-column responsiveness */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
 `;
 
-const ProjectCard = styled.div`
+const ProjectCard = styled(motion.div)`
   background-color: #112240;
   border-radius: 8px;
   overflow: hidden;
-  text-decoration: none;
-  color: #FFFFFF;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
-  transition: all 0.3s ease-in-out;
   border: 1px solid transparent;
   cursor: pointer;
+  height: 250px; /* Fixed height for all cards */
 
   &:hover {
     .project-image {
       transform: scale(1.05);
       filter: brightness(0.7);
     }
-    /* Removed .project-title { opacity: 1; } */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
     border: 1px solid #64FFDA;
   }
@@ -65,37 +85,49 @@ const ProjectCard = styled.div`
 
 const ProjectImage = styled.img`
   width: 100%;
-  height: 250px;
+  height: 100%;
   object-fit: cover;
   transition: all 0.3s ease-in-out;
 `;
 
 const ProjectTitleOverlay = styled.div`
   position: absolute;
-  top: 0; /* Changed from bottom: 0 */
+  bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 1rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+  padding: 2rem 1rem 1rem;
   font-size: 1.5rem;
   font-weight: bold;
-  /* Removed opacity: 0; */
-  transition: opacity 0.3s ease-in-out;
+  color: #FFFFFF;
 `;
+
+const gridVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: { y: 0, opacity: 1 }
+};
 
 const Portfolio = ({ id }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [activeFilter, setActiveFilter] = useState('All');
 
-  const projects = [
-    { id: 1, title: 'E-commerce Platform', image: 'https://picsum.photos/seed/project1/400/250' },
-    { id: 2, title: 'Data Visualization Dashboard', image: 'https://picsum.photos/seed/project2/400/250' },
-    { id: 3, title: 'AI Defect Detection System', image: 'https://picsum.photos/seed/project3/400/250' },
-    { id: 4, title: 'Shrimp Weight Forecasting', image: 'https://picsum.photos/seed/project4/400/250' },
-    { id: 5, title: 'Real-time Bottleneck Analysis', image: 'https://picsum.photos/seed/project5/400/250' },
-    { id: 6, title: 'Freelance Project Management Tool', image: 'https://picsum.photos/seed/project6/400/250' },
-    { id: 7, title: 'Personal Portfolio Website', image: 'https://picsum.photos/seed/project7/400/250' },
-  ];
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === 'All') {
+      return projectsData;
+    }
+    return projectsData.filter(p => p.service === activeFilter);
+  }, [activeFilter]);
 
   const handleCardClick = (project) => {
     setSelectedProject(project);
@@ -107,22 +139,42 @@ const Portfolio = ({ id }) => {
     setSelectedProject(null);
   };
 
+  const filterOptions = ['All', 'AI & Machine Learning', 'Web Applications', 'Desktop Applications'];
+
   return (
-    <PortfolioContainer id={id}
-      as={motion.div}
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <PortfolioContainer id={id}>
       <BackgroundCanvas>
         <Stars />
       </BackgroundCanvas>
       <Title>My Portfolio</Title>
-      <ProjectGrid>
-        {projects.map((project) => (
-          <ProjectCard key={project.id} onClick={() => handleCardClick(project)}>
-            <ProjectImage className="project-image" src={project.image} alt={project.title} />
-            <ProjectTitleOverlay className="project-title">{project.title}</ProjectTitleOverlay>
+
+      <FilterBar>
+        {filterOptions.map(filter => (
+          <FilterButton
+            key={filter}
+            active={activeFilter === filter}
+            onClick={() => setActiveFilter(filter)}
+          >
+            {filter}
+          </FilterButton>
+        ))}
+      </FilterBar>
+
+      <ProjectGrid 
+        key={activeFilter} /* Add key to force re-render */
+        variants={gridVariants} 
+        initial="hidden" 
+        animate="visible"
+      >
+        {filteredProjects.map((project) => (
+          <ProjectCard
+            key={project.id}
+            variants={cardVariants}
+            onClick={() => handleCardClick(project)}
+            layoutId={project.id}
+          >
+            <ProjectImage className="project-image" src={project.images[0]} alt={project.title} />
+            <ProjectTitleOverlay>{project.title}</ProjectTitleOverlay>
           </ProjectCard>
         ))}
       </ProjectGrid>

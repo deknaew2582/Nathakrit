@@ -147,7 +147,7 @@ const Services = ({ id }) => {
           <ServiceCard
             icon="🖥️"
             title="Custom Desktop Applications"
-            description="I create custom desktop software for Windows or macOS to improve your workflow."
+            description="I create custom desktop software for Windows or Linux to improve your workflow."
           />
         </ServiceGrid>
       </ContentContainer>
