@@ -10,7 +10,11 @@ const ServicesContainer = styled.div`
   color: #E0E0E0;
   min-height: 100vh;
   position: relative;
-  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 `;
 
 const BackgroundCanvas = styled(Canvas)`
@@ -22,6 +26,15 @@ const BackgroundCanvas = styled(Canvas)`
   z-index: 0;
 `;
 
+const ContentContainer = styled(motion.div)`
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
+
 const Title = styled.h1`
   text-align: center;
   font-size: 3rem;
@@ -29,97 +42,117 @@ const Title = styled.h1`
   color: #64FFDA;
 `;
 
-const ServiceGrid = styled(motion.div)` // Changed to motion.div
+const ServiceGrid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
+  align-items: stretch; /* Ensures all grid items in a row have the same height */
 `;
 
-const ServiceCard = styled(motion.div)` // Changed to motion.div
-  background-color: #112240;
+// A styled-component for STATIC styles only
+const ServiceCardWrapper = styled.div`
+  background-color: #1B3B6F; /* Much lighter, more distinct background */
   padding: 2rem;
   border-radius: 8px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease-in-out;
   border: 1px solid transparent;
-
-  &:hover {
-    transform: translateY(-10px) scale(1.03) rotateZ(2deg); /* Added scale and rotation */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 0 15px #64FFDA; /* Added glow effect */
-    border: 1px solid #64FFDA;
-  }
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  height: 100%; /* Make the card fill the grid cell height */
+  box-sizing: border-box; /* Include padding in height calculation */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 `;
 
 const CardIcon = styled.div`
   font-size: 3rem;
   margin-bottom: 1rem;
   color: #64FFDA;
-  transition: text-shadow 0.3s ease-in-out; /* Added transition */
-
-  ${ServiceCard}:hover & { /* Apply when parent ServiceCard is hovered */
-    text-shadow: 0 0 10px #64FFDA; /* Glow effect */
-  }
 `;
 
 const CardTitle = styled.h2`
   font-size: 1.8rem;
   margin-bottom: 1rem;
+  color: #FFFFFF;
 `;
 
-const Services = ({ id }) => {
-  return (
-    <ServicesContainer id={id}
-      as={motion.div}
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <BackgroundCanvas>
-        <Stars />
-      </BackgroundCanvas>
-      <Title>My Services</Title>
-      <ServiceGrid
-        variants={containerVariants} // Added variants
-        initial="hidden" // Added initial state
-        animate="visible" // Added animate state
-      >
-        <ServiceCard variants={itemVariants}> {/* Added variants */}
-          <CardIcon>💡</CardIcon>
-          <CardTitle>AI & Machine Learning Solutions</CardTitle>
-          <p>I build AI models that automate tasks and find hidden insights in your data.</p>
-        </ServiceCard>
-        <ServiceCard variants={itemVariants}> {/* Added variants */}
-          <CardIcon>💻</CardIcon>
-          <CardTitle>Full-Stack Web Applications</CardTitle>
-          <p>I build fast and user-friendly websites and web applications, from start to finish.</p>
-        </ServiceCard>
-        <ServiceCard variants={itemVariants}> {/* Added variants */}
-          <CardIcon>🖥️</CardIcon>
-          <CardTitle>Custom Desktop Applications</CardTitle>
-          <p>I create custom desktop software for Windows or macOS to improve your workflow.</p>
-        </ServiceCard>
-      </ServiceGrid>
-    </ServicesContainer>
-  );
-};
+const CardDescription = styled.p`
+  color: #CCCCCC;
+`;
 
-// Add these variants definitions before the Services component
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2 // Stagger animation for children
-    }
-  }
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
-  visible: { y: 0, opacity: 1 }
+  visible: { y: 0, opacity: 1 },
+};
+
+// A single service card component
+const ServiceCard = ({ icon, title, description }) => {
+  return (
+    <motion.div
+      variants={itemVariants}
+      whileHover={{
+        y: -10,
+        scale: 1.03,
+        boxShadow: "0 10px 20px rgba(0, 0, 0, 0.7), 0 0 20px #64FFDA",
+      }}
+      transition={{ duration: 0.3 }}
+      style={{ height: '100%' }} // Ensure the motion div stretches
+    >
+      <ServiceCardWrapper>
+        <CardIcon>{icon}</CardIcon>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </ServiceCardWrapper>
+    </motion.div>
+  );
+};
+
+const Services = ({ id }) => {
+  return (
+    <ServicesContainer id={id}>
+      <BackgroundCanvas>
+        <Stars />
+      </BackgroundCanvas>
+      <ContentContainer
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Title>My Services</Title>
+        <ServiceGrid variants={containerVariants} initial="hidden" animate="visible">
+          <ServiceCard
+            icon="💡"
+            title="AI & Machine Learning Solutions"
+            description="I build AI models that automate tasks and find hidden insights in your data."
+          />
+          <ServiceCard
+            icon="💻"
+            title="Full-Stack Web Applications"
+            description="I build fast and user-friendly websites and web applications, from start to finish."
+          />
+          <ServiceCard
+            icon="🖥️"
+            title="Custom Desktop Applications"
+            description="I create custom desktop software for Windows or macOS to improve your workflow."
+          />
+        </ServiceGrid>
+      </ContentContainer>
+    </ServicesContainer>
+  );
 };
 
 export default Services;

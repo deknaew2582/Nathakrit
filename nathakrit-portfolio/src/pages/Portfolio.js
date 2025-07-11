@@ -88,10 +88,13 @@ const Portfolio = ({ id }) => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   const projects = [
-    { id: 1, title: 'Project One', image: 'https://picsum.photos/seed/project1/400/250' },
-    { id: 2, title: 'Project Two', image: 'https://picsum.photos/seed/project2/400/250' },
-    { id: 3, title: 'Project Three', image: 'https://picsum.photos/seed/project3/400/250' },
-    { id: 4, title: 'Project Four', image: 'https://picsum.photos/seed/project4/400/250' },
+    { id: 1, title: 'E-commerce Platform', image: 'https://picsum.photos/seed/project1/400/250' },
+    { id: 2, title: 'Data Visualization Dashboard', image: 'https://picsum.photos/seed/project2/400/250' },
+    { id: 3, title: 'AI Defect Detection System', image: 'https://picsum.photos/seed/project3/400/250' },
+    { id: 4, title: 'Shrimp Weight Forecasting', image: 'https://picsum.photos/seed/project4/400/250' },
+    { id: 5, title: 'Real-time Bottleneck Analysis', image: 'https://picsum.photos/seed/project5/400/250' },
+    { id: 6, title: 'Freelance Project Management Tool', image: 'https://picsum.photos/seed/project6/400/250' },
+    { id: 7, title: 'Personal Portfolio Website', image: 'https://picsum.photos/seed/project7/400/250' },
   ];
 
   const handleCardClick = (project) => {
