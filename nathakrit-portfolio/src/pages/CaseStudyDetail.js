@@ -3,14 +3,9 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 const DetailContainer = styled(motion.div)`
-  padding: 2rem;
-  background-color: #112240;
   color: #E0E0E0;
-  border-radius: 8px;
   max-width: 900px;
   width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
 `;
 
 const ProjectTitle = styled.h1`
@@ -156,9 +151,9 @@ const CaseStudyDetail = ({ project }) => {
               {project.technologies.map(tech => <TechTag key={tech}>{tech}</TechTag>)}
             </TechList>
           </Section>
-          <LiveDemoButton 
-            href={project.liveDemoUrl} 
-            target="_blank" 
+          <LiveDemoButton
+            href={project.liveDemoUrl}
+            target="_blank"
             rel="noopener noreferrer"
             className={!project.liveDemoUrl ? 'disabled' : ''}
             onClick={(e) => !project.liveDemoUrl && e.preventDefault()}
@@ -169,7 +164,7 @@ const CaseStudyDetail = ({ project }) => {
       </MainContent>
       <ImageGallery>
         {project.images.map((img, index) => (
-            <ProjectImage key={index} src={img} alt={`${project.title} screenshot ${index + 1}`} />
+          <ProjectImage key={index} src={img} alt={`${project.title} screenshot ${index + 1}`} />
         ))}
       </ImageGallery>
     </DetailContainer>

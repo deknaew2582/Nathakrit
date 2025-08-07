@@ -16,7 +16,7 @@ const ModalOverlay = styled(motion.div)`
 `;
 
 const ModalContent = styled(motion.div)`
-  background-color: #0A192F;
+  background-color: #112240;
   padding: 2rem;
   border-radius: 8px;
   max-width: 90%;

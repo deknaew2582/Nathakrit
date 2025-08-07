@@ -15,12 +15,28 @@ const PortfolioContainer = styled.div`
   position: relative;
   z-index: 1;
 
-  /* Hide scrollbars */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  /* Elegant thin scrollbar */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #64FFDA #0A192F; /* Firefox */
   
+  /* Webkit browsers (Chrome, Safari, Edge) */
   &::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
+    width: 4px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(16, 34, 64, 0.3);
+    border-radius: 2px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #64FFDA;
+    border-radius: 2px;
+    transition: background 0.3s ease;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: #4fd1c7;
   }
 `;
 

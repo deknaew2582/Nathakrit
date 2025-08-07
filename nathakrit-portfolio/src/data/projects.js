@@ -9,7 +9,7 @@ export const projectsData = [
         challenge: "A factory's production line had a low Overall Equipment Effectiveness (OEE) of 20%, but the specific causes and bottlenecks were unknown due to a lack of real-time data.",
         solution: "I developed a system to stream machine data every minute using MQTT, created APIs with FastAPI to process it, and performed time-series analysis to pinpoint inefficiencies.",
         results: "The insights from the data allowed for targeted improvements that boosted the factory's OEE from 20% to over 80% within a few days, dramatically increasing production efficiency.",
-        images: ['/images/placeholder-1a.jpg', '/images/placeholder-1b.jpg'],
+        images: ['/images/oee-1.png', '/images/oee-2.png', '/images/oee-3.png'],
         liveDemoUrl: 'https://oee-dashboard-react.vercel.app/',
     },
     {
@@ -35,7 +35,7 @@ export const projectsData = [
         challenge: "Aquaculture farms needed a way to proactively manage water quality to ensure optimal growth and health of aquatic life, preventing potential losses.",
         solution: "I developed a full-stack application that used sensor data and a machine learning model to forecast water quality. The system included automated data transfer from edge devices and a web app with notifications.",
         results: "The application provided farm operators with actionable forecasts, allowing them to maintain optimal water quality, reduce costs, and maximize stock survival rates.",
-        images: ['/images/placeholder-3a.jpg', '/images/placeholder-3b.jpg', '/images/placeholder-3c.jpg'],
+        images: ['/images/aqaul-1.png', '/images/aqual-2.png', '/images/aqual-3.png'],
         liveDemoUrl: 'https://aquaculture-kappa.vercel.app/',
     },
     {
@@ -48,7 +48,7 @@ export const projectsData = [
         challenge: "A client was using an outdated and inflexible weighing machine application that hindered their operational speed and accuracy.",
         solution: "I re-engineered the legacy system into a modern, user-friendly desktop app using PySide6. The new system connected directly with PLCs via Modbus TCP and used a local SQLite database for reliable data storage.",
         results: "The new application significantly improved operational speed, data accuracy, and workflow flexibility, giving the client a more powerful and reliable tool.",
-        images: ['/images/placeholder-4a.jpg', '/images/placeholder-4b.jpg'],
+        images: ['/images/weight-1.png', '/images/weight-2.png', '/images/weight-3.png'],
         liveDemoUrl: null,
     },
     {
@@ -61,7 +61,7 @@ export const projectsData = [
         challenge: "A medical facility needed a digital solution to streamline patient care documentation and improve workflow analysis for nursing staff.",
         solution: "I developed a comprehensive full-stack web application with secure authentication, a digital patient records system, and an interface for hourly activity logging. A dashboard generated summaries and charts for analysis.",
         results: "The system digitized and streamlined patient care documentation, enabling clear, real-time reporting and providing management with data to improve workflow and staffing decisions.",
-        images: ['/images/placeholder-5a.jpg', '/images/placeholder-5b.jpg'],
+        images: ['/images/htrack-1.png', '/images/htrack-2.png', '/images/htrack-3.png'],
         liveDemoUrl: 'https://h-tracking.onrender.com',
     },
     {
@@ -74,7 +74,7 @@ export const projectsData = [
         challenge: "An agricultural store with over 20,000 products needed a custom, high-performance e-commerce platform to manage its massive inventory and scale its online sales.",
         solution: "I architected and developed a full-stack e-commerce platform from scratch, featuring an intuitive admin console for easy management. The entire system was containerized with Docker and deployed on a custom-configured, SSL-secured server.",
         results: "The platform provided the client with a robust, scalable, and secure solution to manage and sell their products online, directly enabling business growth.",
-        images: ['/images/placeholder-6a.jpg', '/images/placeholder-6b.jpg', '/images/placeholder-6c.jpg'],
+        images: ['/images/agri-store-1.png', '/images/agri-store-2.png', '/images/agri-store-3.png'],
         liveDemoUrl: 'https://agricommerce-store.vercel.app/',
     },
     {
