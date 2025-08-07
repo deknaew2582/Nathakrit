@@ -49,7 +49,7 @@ const Home = ({ id }) => {
         <Stars />
       </BackgroundCanvas>
       <MagneticButton><Title>Nathakrit Chuajeen</Title></MagneticButton>
-      <MagneticButton><Subtitle>Creative Developer & AI Specialist</Subtitle></MagneticButton>
+      <MagneticButton><Subtitle>Software Developer & AI Innovator</Subtitle></MagneticButton>
     </HomeContainer>
   );
 };

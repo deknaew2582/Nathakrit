@@ -14,6 +14,14 @@ const PortfolioContainer = styled.div`
   min-height: 100vh;
   position: relative;
   z-index: 1;
+
+  /* Hide scrollbars */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
 `;
 
 const BackgroundCanvas = styled(Canvas)`
@@ -30,6 +38,8 @@ const Title = styled.h1`
   font-size: 3rem;
   margin-bottom: 2rem;
   color: #64FFDA;
+  position: relative;
+  z-index: 10;
 `;
 
 const FilterBar = styled.div`
@@ -37,6 +47,8 @@ const FilterBar = styled.div`
   justify-content: center;
   gap: 1rem;
   margin-bottom: 3rem;
+  position: relative;
+  z-index: 10;
 `;
 
 const FilterButton = styled.button`
@@ -57,10 +69,30 @@ const FilterButton = styled.button`
 
 const ProjectGrid = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+  z-index: 10;
+
+  /* Responsive 3-column layout */
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Hide scrollbars */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
 `;
 
 const ProjectCard = styled(motion.div)`
@@ -72,6 +104,14 @@ const ProjectCard = styled(motion.div)`
   border: 1px solid transparent;
   cursor: pointer;
   height: 250px; /* Fixed height for all cards */
+
+  /* Hide scrollbars */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
 
   &:hover {
     .project-image {
@@ -160,10 +200,10 @@ const Portfolio = ({ id }) => {
         ))}
       </FilterBar>
 
-      <ProjectGrid 
+      <ProjectGrid
         key={activeFilter} /* Add key to force re-render */
-        variants={gridVariants} 
-        initial="hidden" 
+        variants={gridVariants}
+        initial="hidden"
         animate="visible"
       >
         {filteredProjects.map((project) => (
