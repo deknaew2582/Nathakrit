@@ -130,7 +130,8 @@ const ProjectCard = styled(motion.div)`
   }
 
   &:hover {
-    .project-image {
+    .project-media img,
+    .project-media video {
       transform: scale(1.05);
       filter: brightness(0.7);
     }
@@ -139,11 +140,17 @@ const ProjectCard = styled(motion.div)`
   }
 `;
 
-const ProjectImage = styled.img`
+const ProjectMedia = styled.div`
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  
+  img, video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+  }
 `;
 
 const ProjectTitleOverlay = styled.div`
@@ -177,6 +184,30 @@ const Portfolio = ({ id }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeFilter, setActiveFilter] = useState('All');
+
+  // Helper function to determine media type and render appropriate element
+  const renderProjectMedia = (mediaSrc, title) => {
+    const extension = mediaSrc.split('.').pop().toLowerCase();
+
+    if (extension === 'mp4' || extension === 'webm' || extension === 'mov') {
+      return (
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          alt={title}
+        >
+          <source src={mediaSrc} type={`video/${extension === 'mov' ? 'quicktime' : extension}`} />
+        </video>
+      );
+    } else if (extension === 'gif') {
+      return <img src={mediaSrc} alt={title} />;
+    } else {
+      // Default to image for jpg, png, etc.
+      return <img src={mediaSrc} alt={title} />;
+    }
+  };
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === 'All') {
@@ -229,7 +260,9 @@ const Portfolio = ({ id }) => {
             onClick={() => handleCardClick(project)}
             layoutId={project.id}
           >
-            <ProjectImage className="project-image" src={project.images[0]} alt={project.title} />
+            <ProjectMedia className="project-media">
+              {renderProjectMedia(project.images[0], project.title)}
+            </ProjectMedia>
             <ProjectTitleOverlay>{project.title}</ProjectTitleOverlay>
           </ProjectCard>
         ))}

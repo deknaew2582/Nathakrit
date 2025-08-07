@@ -87,7 +87,7 @@ export const projectsData = [
         challenge: "The process of manually labeling thousands of images for computer vision datasets is extremely time-consuming and tedious, creating a bottleneck for AI development.",
         solution: "I created a web-based, locally-run application to automate and accelerate the image labeling process. The tool helps pre-label images using AI models, requiring only minor corrections from the user.",
         results: "This internal tool significantly reduces the manual effort and time required to prepare high-quality data for training computer vision models.",
-        images: ['/images/placeholder-7a.jpg', '/images/placeholder-7b.jpg'],
+        images: ['/images/output1.mp4', '/images/output2.mp4'],
         liveDemoUrl: null,
     },
     {
@@ -100,7 +100,7 @@ export const projectsData = [
         challenge: "Taking student attendance manually can be inefficient and inaccurate. I wanted to build an automated solution using facial recognition.",
         solution: "I built and trained a facial recognition model with 95% accuracy using TensorFlow and OpenCV. The desktop application could identify registered students from a live CCTV feed, detect unregistered faces, and even measure emotional sentiment.",
         results: "The project is a successful proof-of-concept for an automated system that can enhance classroom monitoring and streamline attendance tracking.",
-        images: ['/images/placeholder-8a.jpg', '/images/placeholder-8b.jpg'],
+        images: ['/images/output1.gif', '/images/output2.gif', '/images/output3.gif'],
         liveDemoUrl: null,
     }
 ];
