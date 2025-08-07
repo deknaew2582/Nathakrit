@@ -6,6 +6,11 @@ const DetailContainer = styled(motion.div)`
   color: #E0E0E0;
   max-width: 900px;
   width: 100%;
+  padding: 0 1rem;
+
+  @media (max-width: 480px) {
+    padding: 0 0.5rem;
+  }
 `;
 
 const ProjectTitle = styled.h1`
@@ -13,6 +18,17 @@ const ProjectTitle = styled.h1`
   color: #64FFDA;
   margin-bottom: 2rem;
   text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.75rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.2;
+  }
 `;
 
 const MainContent = styled.div`
@@ -22,6 +38,14 @@ const MainContent = styled.div`
 
   @media (min-width: 768px) {
     flex-direction: row;
+  }
+
+  @media (max-width: 768px) {
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1rem;
   }
 `;
 
@@ -34,10 +58,26 @@ const RightColumn = styled.div`
   background-color: #0A192F;
   padding: 1.5rem;
   border-radius: 8px;
+
+  @media (max-width: 768px) {
+    padding: 1.25rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+  }
 `;
 
 const Section = styled.div`
   margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 1.25rem;
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -46,11 +86,31 @@ const SectionTitle = styled.h2`
   margin-bottom: 1rem;
   border-bottom: 1px solid #64FFDA;
   padding-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
 `;
 
 const Paragraph = styled.p`
   font-size: 1rem;
   line-height: 1.6;
+
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
 `;
 
 const InfoList = styled.ul`
@@ -69,6 +129,10 @@ const TechList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+
+  @media (max-width: 480px) {
+    gap: 0.4rem;
+  }
 `;
 
 const TechTag = styled.span`
@@ -77,6 +141,16 @@ const TechTag = styled.span`
   padding: 0.3rem 0.7rem;
   border-radius: 5px;
   font-size: 0.9rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.6rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+  }
 `;
 
 const LiveDemoButton = styled.a`
@@ -90,6 +164,17 @@ const LiveDemoButton = styled.a`
   text-align: center;
   margin-top: 1rem;
   transition: all 0.3s ease;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    padding: 0.7rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
 
   &:hover {
     background-color: #4CAF9D;
@@ -108,6 +193,16 @@ const MediaGallery = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
+
+    @media (max-width: 768px) {
+        margin-top: 1.5rem;
+        gap: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+        margin-top: 1.25rem;
+        gap: 1rem;
+    }
 `;
 
 const MediaItem = styled.div`
@@ -122,6 +217,14 @@ const MediaItem = styled.div`
     video {
         max-height: 600px;
         object-fit: contain;
+
+        @media (max-width: 768px) {
+            max-height: 400px;
+        }
+
+        @media (max-width: 480px) {
+            max-height: 300px;
+        }
     }
 `;
 

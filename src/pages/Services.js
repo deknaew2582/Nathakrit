@@ -15,6 +15,14 @@ const ServicesContainer = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 3rem 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 0.75rem;
+  }
 `;
 
 const BackgroundCanvas = styled(Canvas)`
@@ -40,6 +48,16 @@ const Title = styled.h1`
   font-size: 3rem;
   margin-bottom: 3rem;
   color: #64FFDA;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const ServiceGrid = styled(motion.div)`
@@ -50,6 +68,15 @@ const ServiceGrid = styled(motion.div)`
   margin: 0 auto;
   width: 100%;
   align-items: stretch; /* Ensures all grid items in a row have the same height */
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1rem;
+  }
 `;
 
 // A styled-component for STATIC styles only
@@ -66,22 +93,58 @@ const ServiceCardWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.25rem;
+  }
 `;
 
 const CardIcon = styled.div`
   font-size: 3rem;
   margin-bottom: 1rem;
   color: #64FFDA;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const CardTitle = styled.h2`
   font-size: 1.8rem;
   margin-bottom: 1rem;
   color: #FFFFFF;
+
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const CardDescription = styled.p`
   color: #CCCCCC;
+
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
 `;
 
 const containerVariants = {

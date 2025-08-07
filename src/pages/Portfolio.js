@@ -15,6 +15,14 @@ const PortfolioContainer = styled.div`
   position: relative;
   z-index: 1;
 
+  @media (max-width: 768px) {
+    padding: 3rem 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 0.75rem;
+  }
+
   /* Elegant thin scrollbar */
   scrollbar-width: thin; /* Firefox */
   scrollbar-color: #64FFDA #0A192F; /* Firefox */
@@ -56,6 +64,16 @@ const Title = styled.h1`
   color: #64FFDA;
   position: relative;
   z-index: 10;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const Disclaimer = styled.div`
@@ -69,11 +87,31 @@ const Disclaimer = styled.div`
   color: #E0E0E0;
   position: relative;
   z-index: 10;
+
+  @media (max-width: 768px) {
+    margin: 0 auto 2rem;
+    padding: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    margin: 0 auto 1.5rem;
+    padding: 0.75rem;
+  }
   
   p {
     margin: 0;
     font-size: 1rem;
     line-height: 1.6;
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
   }
   
   .demo-note {
@@ -89,6 +127,17 @@ const FilterBar = styled.div`
   margin-bottom: 3rem;
   position: relative;
   z-index: 10;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const FilterButton = styled.button`
@@ -100,6 +149,18 @@ const FilterButton = styled.button`
   cursor: pointer;
   font-weight: bold;
   transition: all 0.3s ease;
+  font-size: 0.9rem;
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+  }
 
   &:hover {
     background-color: #64FFDA;
@@ -109,7 +170,7 @@ const FilterButton = styled.button`
 
 const ProjectGrid = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -120,10 +181,16 @@ const ProjectGrid = styled(motion.div)`
   @media (min-width: 1200px) {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   /* Hide scrollbars */
@@ -145,6 +212,14 @@ const ProjectCard = styled(motion.div)`
   cursor: pointer;
   height: 250px; /* Fixed height for all cards */
 
+  @media (max-width: 768px) {
+    height: 220px;
+  }
+
+  @media (max-width: 480px) {
+    height: 200px;
+  }
+
   /* Hide scrollbars */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -161,6 +236,16 @@ const ProjectCard = styled(motion.div)`
     }
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
     border: 1px solid #64FFDA;
+  }
+
+  @media (max-width: 768px) {
+    &:hover {
+      .project-media img,
+      .project-media video {
+        transform: none;
+        filter: none;
+      }
+    }
   }
 `;
 
@@ -187,6 +272,17 @@ const ProjectTitleOverlay = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
   color: #FFFFFF;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 0.75rem 0.75rem;
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.25rem 0.5rem 0.5rem;
+    font-size: 1.1rem;
+    line-height: 1.2;
+  }
 `;
 
 const gridVariants = {

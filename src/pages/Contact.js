@@ -16,6 +16,14 @@ const ContactContainer = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 3rem 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 0.75rem;
+  }
 `;
 
 const BackgroundCanvas = styled(Canvas)`
@@ -41,18 +49,48 @@ const Heading = styled.h1`
   color: #64FFDA;
   margin-bottom: 1.5rem;
   max-width: 600px;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
 `;
 
 const CallToAction = styled.p`
   font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+  }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 300px;
+  }
 `;
 
 const StyledButton = styled.a`
@@ -66,11 +104,29 @@ const StyledButton = styled.a`
   transition: all 0.3s ease;
   font-weight: bold;
 
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    padding: 0.7rem 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    padding: 0.75rem 1.25rem;
+    width: 100%;
+    text-align: center;
+  }
+
   &:hover {
     background-color: #4CAF9D;
     color: #FFFFFF;
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    &:hover {
+      transform: translateY(-2px);
+    }
   }
 `;
 

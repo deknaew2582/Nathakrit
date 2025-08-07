@@ -9,9 +9,25 @@ const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   color: #FFFFFF;
+
+  @media (max-width: 768px) {
+    padding: 1rem 1.5rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem 1rem;
+    gap: 0.75rem;
+  }
 `;
 
 const NavLinks = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+
   a {
     color: #FFFFFF;
     text-decoration: none;
@@ -20,6 +36,18 @@ const NavLinks = styled.div`
     padding: 0.5rem 1rem;
     border-radius: 5px;
     transition: all 0.3s ease;
+
+    @media (max-width: 768px) {
+      margin-left: 0;
+      font-size: 1.1rem;
+      padding: 0.4rem 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1rem;
+      padding: 0.35rem 0.7rem;
+    }
+
     &:hover {
       color: #64FFDA;
       background-color: rgba(100, 255, 218, 0.1);

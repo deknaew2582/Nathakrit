@@ -15,6 +15,14 @@ const AboutContainer = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden; /* Prevents background from spilling out */
+
+  @media (max-width: 768px) {
+    padding: 3rem 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 0.75rem;
+  }
 `;
 
 const BackgroundCanvas = styled(Canvas)`
@@ -40,6 +48,16 @@ const Title = styled.h1`
   color: #64FFDA;
   margin-bottom: 3rem;
   text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -53,6 +71,14 @@ const ContentWrapper = styled.div`
   @media (min-width: 768px) {
     flex-direction: row;
     align-items: flex-start;
+  }
+
+  @media (max-width: 768px) {
+    gap: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1.5rem;
   }
 `;
 
@@ -71,6 +97,14 @@ const ProfileImage = styled.img`
   border: 2px solid #64FFDA;
   box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
   object-fit: cover;
+
+  @media (max-width: 768px) {
+    max-width: 250px;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 200px;
+  }
 `;
 
 const TextColumn = styled.div`
@@ -80,6 +114,14 @@ const TextColumn = styled.div`
   background-color: #0A192F;
   border-radius: 8px;
   border: 2px solid #64FFDA;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+  }
 `;
 
 const Paragraph = styled.p`
@@ -87,8 +129,19 @@ const Paragraph = styled.p`
   line-height: 1.7;
   margin-bottom: 1.5rem;
   text-align: left;
-  
   color: #FFFFFF;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
 `;
 
 const About = ({ id }) => {
