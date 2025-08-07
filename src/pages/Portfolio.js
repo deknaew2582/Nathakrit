@@ -58,6 +58,30 @@ const Title = styled.h1`
   z-index: 10;
 `;
 
+const Disclaimer = styled.div`
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  padding: 1.5rem;
+  background-color: rgba(17, 34, 64, 0.6);
+  border: 1px solid #64FFDA;
+  border-radius: 8px;
+  color: #E0E0E0;
+  position: relative;
+  z-index: 10;
+  
+  p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  .demo-note {
+    color: #64FFDA;
+    font-weight: bold;
+  }
+`;
+
 const FilterBar = styled.div`
   display: flex;
   justify-content: center;
@@ -187,25 +211,29 @@ const Portfolio = ({ id }) => {
 
   // Helper function to determine media type and render appropriate element
   const renderProjectMedia = (mediaSrc, title) => {
+    if (!mediaSrc) return <img src="/images/placeholder.jpg" alt={title} />;
+
     const extension = mediaSrc.split('.').pop().toLowerCase();
 
     if (extension === 'mp4' || extension === 'webm' || extension === 'mov') {
       return (
         <video
+          key={mediaSrc}
           autoPlay
           loop
           muted
           playsInline
-          alt={title}
+          onError={(e) => console.log('Video error:', e)}
         >
           <source src={mediaSrc} type={`video/${extension === 'mov' ? 'quicktime' : extension}`} />
+          Your browser does not support the video tag.
         </video>
       );
     } else if (extension === 'gif') {
-      return <img src={mediaSrc} alt={title} />;
+      return <img src={mediaSrc} alt={title} onError={(e) => console.log('GIF error:', e)} />;
     } else {
       // Default to image for jpg, png, etc.
-      return <img src={mediaSrc} alt={title} />;
+      return <img src={mediaSrc} alt={title} onError={(e) => console.log('Image error:', e)} />;
     }
   };
 
@@ -234,6 +262,12 @@ const Portfolio = ({ id }) => {
         <Stars />
       </BackgroundCanvas>
       <Title>My Portfolio</Title>
+
+      <Disclaimer>
+        <p>
+          <span className="demo-note">*Demo Notice:</span> The projects displayed here are demonstration versions and may not reflect the complete functionality of the original implementations. Some projects cannot be shown publicly due to customer privacy requirements and confidentiality agreements. The showcased work represents the core concepts and technical approaches used in real-world applications.
+        </p>
+      </Disclaimer>
 
       <FilterBar>
         {filterOptions.map(filter => (

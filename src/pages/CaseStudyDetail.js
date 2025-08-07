@@ -103,20 +103,56 @@ const LiveDemoButton = styled.a`
   }
 `;
 
-const ImageGallery = styled.div`
+const MediaGallery = styled.div`
     margin-top: 2rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 `;
 
-const ProjectImage = styled.img`
+const MediaItem = styled.div`
     width: 100%;
-    border-radius: 8px;
+    
+    img, video {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    video {
+        max-height: 600px;
+        object-fit: contain;
+    }
 `;
 
 const CaseStudyDetail = ({ project }) => {
   if (!project) return null;
+
+  // Helper function to render different media types
+  const renderMedia = (mediaSrc, index, title) => {
+    if (!mediaSrc) return null;
+
+    const extension = mediaSrc.split('.').pop().toLowerCase();
+
+    if (extension === 'mp4' || extension === 'webm' || extension === 'mov') {
+      return (
+        <video
+          key={`${mediaSrc}-${index}`}
+          controls
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src={mediaSrc} type={`video/${extension === 'mov' ? 'quicktime' : extension}`} />
+          Your browser does not support the video tag.
+        </video>
+      );
+    } else {
+      // For images and GIFs
+      return <img src={mediaSrc} alt={`${title} media ${index + 1}`} />;
+    }
+  };
 
   return (
     <DetailContainer>
@@ -162,11 +198,13 @@ const CaseStudyDetail = ({ project }) => {
           </LiveDemoButton>
         </RightColumn>
       </MainContent>
-      <ImageGallery>
-        {project.images.map((img, index) => (
-          <ProjectImage key={index} src={img} alt={`${project.title} screenshot ${index + 1}`} />
+      <MediaGallery>
+        {project.images.map((mediaSrc, index) => (
+          <MediaItem key={index}>
+            {renderMedia(mediaSrc, index, project.title)}
+          </MediaItem>
         ))}
-      </ImageGallery>
+      </MediaGallery>
     </DetailContainer>
   );
 };
